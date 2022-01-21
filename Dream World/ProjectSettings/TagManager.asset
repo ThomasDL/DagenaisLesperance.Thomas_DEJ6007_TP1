@@ -4,13 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hero
   - NPC
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Hero
+  - Player
   - Water
   - UI
   - NPC
@@ -40,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1343167561
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

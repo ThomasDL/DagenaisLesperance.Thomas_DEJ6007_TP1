@@ -1,0 +1,6 @@
+﻿title: TestCutscene1
+position: -41,-50
+---
+<<MoveDialogueBoxTo GameManager God God>>
+God: This here is where I was born.
+===

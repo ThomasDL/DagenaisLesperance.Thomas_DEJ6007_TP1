@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         hit = Physics2D.Raycast(playerRb.position + Vector2.up * 0.2f,lookDirection,1.2f,LayerMask.GetMask("NPC"));
         if (hit.collider != null)
         {
-            dialogueSystem.StartDialogue(GameManager.instance.DialogueChoice(hit.collider.name));
+            GameManager.instance.NPCDialogue(hit.collider.name);
         }
         hit = Physics2D.Raycast(playerRb.position + Vector2.up * 0.2f, lookDirection, 1.2f, LayerMask.GetMask("InteractableObject"));
         if (hit.collider != null)

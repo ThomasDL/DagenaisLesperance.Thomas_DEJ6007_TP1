@@ -6,21 +6,21 @@ Hero: Wow!
 Hero: My first ever Yarn script in Unity! Yeaaaaaaaaaah!!! Woohoo!!! We're gonna have so much fun!
 <<MoveDialogueBoxTo GameManager God Player>>
 God: You still have much to learn...
-<<AddEventToDictionary GameManager God 2>>
+<<AddDialogueNodeToDictionary GameManager God 2>>
 ===
 title: GodNode2
 position: -55,-165
 ---
 <<MoveDialogueBoxTo GameManager God Player>>
 God: Still there, uh?
-<<AddEventToDictionary GameManager God 3>>
+<<AddDialogueNodeToDictionary GameManager God 3>>
 ===
 title: GodNode3
 position: -56,-126
 ---
 <<MoveDialogueBoxTo GameManager God Player>>
 God: Alright, follow me...
-<<AddEventToDictionary GameManager God 4>>
+<<AddDialogueNodeToDictionary GameManager God 4>>
 <<LoadNewScene GameManager GodVision>>
 ===
 title: GodNode4

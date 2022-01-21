@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool playerActive = true;
     public Dictionary<string, int> npcDialoguesNodes = new Dictionary<string, int>();
+    public List<string> eventNodes = new List<string>();
     public DialogueRunner dialogueRunner;
 
     void Awake()
@@ -22,20 +23,26 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-
-    public string DialogueChoice(string NPC)
+    public void CallDialogueNode(string node)
+    {
+        dialogueRunner.StartDialogue(node);
+    }
+    // Returns the correct dialogue node for a NPC
+    // If this is the first time talking to the NPC, returns node1
+    public void NPCDialogue(string NPC)
     {
         if (!npcDialoguesNodes.ContainsKey(NPC))
         {
-            return NPC + "Node" + 1;
+            dialogueRunner.StartDialogue(NPC + "Node" + 1);
         }
         else
         {
-            return NPC + "Node" + npcDialoguesNodes[NPC];
+            dialogueRunner.StartDialogue(NPC + "Node" + npcDialoguesNodes[NPC]);
         }
     }
-    [YarnCommand("AddEventToDictionary")]
-    public void AddEventToDictionary(string name, int node)
+    // Tracks the progression of the player related to conversations
+    [YarnCommand("AddDialogueNodeToDictionary")]
+    public void AddDialogueNodeToDictionary(string name, int node)
     {
         if (!npcDialoguesNodes.ContainsKey(name))
         {
@@ -44,6 +51,13 @@ public class GameManager : MonoBehaviour
         else
         {
             npcDialoguesNodes[name] = node;
+        }
+    }
+    public void AddEventToList(string eventName)
+    {
+        if (!eventNodes.Contains(eventName))
+        {
+            eventNodes.Add(eventName);
         }
     }
     [YarnCommand("LoadNewScene")]
@@ -76,15 +90,6 @@ public class GameManager : MonoBehaviour
             {
                 dialogueRunner.transform.position = talkerObject.transform.position + Vector3.down * cameraOffsetDown;
             }
-        }
-    }
-    void MoveDialogueBoxTo(string talker)
-    {
-        GameObject talkerObject = GameObject.Find(talker);
-        float cameraOffsetDown = 1.5f;
-        if (talkerObject != null)
-        {
-            dialogueRunner.transform.position = talkerObject.transform.position + Vector3.down * cameraOffsetDown;
         }
     }
 }
