@@ -6,10 +6,13 @@ using Yarn.Unity;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public bool playerActive = true;
+
     public Dictionary<string, int> npcDialoguesNodes = new Dictionary<string, int>();
     public List<string> eventNodes = new List<string>();
+
     public DialogueRunner dialogueRunner;
+
+    public bool playerActive = true;
 
     void Awake()
     {
@@ -73,23 +76,11 @@ public class GameManager : MonoBehaviour
     {
         playerActive = false;
     }
-    [YarnCommand("MoveDialogueBoxTo")]
-    void MoveDialogueBoxTo(string talker, string listener)
+
+    public void MoveDialogueBoxTo(string talker)
     {
-        GameObject talkerObject = GameObject.Find(talker);
-        GameObject listenerObject = GameObject.Find(listener);
-        float cameraOffsetDown = 1.5f;
-        float cameraOffsetUp = 2.2f;
-        if (talkerObject != null && listenerObject != null)
-        {
-            if (talkerObject.transform.position.y > listenerObject.transform.position.y)
-            {
-                dialogueRunner.transform.position = talkerObject.transform.position + Vector3.up * cameraOffsetUp;
-            }
-            else
-            {
-                dialogueRunner.transform.position = talkerObject.transform.position + Vector3.down * cameraOffsetDown;
-            }
-        }
+        Vector3 talkerPosition = GameObject.Find(talker).transform.position;
+        float cameraOffset = 2.2f;
+        dialogueRunner.transform.position = talkerPosition + Vector3.up * cameraOffset;
     }
 }
