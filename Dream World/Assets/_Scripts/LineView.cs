@@ -346,23 +346,11 @@ namespace Yarn.Unity
 
             interruptionFlag.Clear();
 
-            if (characterNameText == null)
-            {
-                if (showCharacterNameInLineView)
-                {
-                    lineText.text = dialogueLine.Text.Text;
-                }
-                else
-                {
-                    lineText.text = dialogueLine.TextWithoutCharacterName.Text;
-                }
-            }
-            else
-            {
+
                 //characterNameText.text = dialogueLine.CharacterName;
                 GameManager.instance.MoveDialogueBoxTo(dialogueLine.CharacterName);
                 lineText.text = dialogueLine.TextWithoutCharacterName.Text;
-            }
+    
 
             if (useFadeEffect)
             {

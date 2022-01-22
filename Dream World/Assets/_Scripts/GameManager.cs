@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn.Unity;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -80,7 +81,6 @@ public class GameManager : MonoBehaviour
     public void MoveDialogueBoxTo(string talker)
     {
         Vector3 talkerPosition = GameObject.Find(talker).transform.position;
-        float cameraOffset = 2.2f;
-        dialogueRunner.transform.position = talkerPosition + Vector3.up * cameraOffset;
+        transform.position = talkerPosition;
     }
 }
