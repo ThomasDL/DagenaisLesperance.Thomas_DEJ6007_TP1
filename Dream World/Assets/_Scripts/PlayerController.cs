@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 move;
     public Animator playerAnim;
     private float walkSpeed = 3.0f;
-    public DialogueRunner dialogueSystem;
     RaycastHit2D hit;
 
     void Start()
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         lookDirection.Set(0, -1);
-        dialogueSystem = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
     // Update is called once per frame
