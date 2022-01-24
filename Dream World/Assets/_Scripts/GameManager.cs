@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public List<string> eventNodes = new List<string>();
 
     public DialogueRunner dialogueRunner;
+    public Canvas dialogueCanvas;
 
     public bool playerActive = true;
 
@@ -81,6 +82,6 @@ public class GameManager : MonoBehaviour
     public void MoveDialogueBoxTo(string talker)
     {
         Vector3 talkerPosition = GameObject.Find(talker).transform.position;
-        transform.position = talkerPosition;
+        dialogueCanvas.transform.position = talkerPosition;
     }
 }
