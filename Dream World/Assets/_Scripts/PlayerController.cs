@@ -1,4 +1,5 @@
 using UnityEngine;
+using PixelCrushers.DialogueSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float maxJumpTime = 0.2f;
     private float jumpTimer;
     private bool grounded;
+    private RaycastHit2D hit;
 
     void Start()
     {
@@ -37,7 +39,11 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.instance.playerActive) { HandleMovement(); }
+        if (GameManager.instance.playerActive) 
+        { 
+            HandleMovement();
+            CheckForInteractions();
+        }
         CheckIfGrounded();
     }
     void HandleInput()
@@ -60,13 +66,13 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.instance.playerActive)
         {
-            if (horizontalInput > 0.2f)
+            if (horizontalInput > 0.1f)
             {
                 lookDirection = 1;
                 playerSprite.flipX = false;
 
             }
-            else if (horizontalInput < -0.2f)
+            else if (horizontalInput < -0.1f)
             {
                 lookDirection = -1;
                 playerSprite.flipX = true;
@@ -118,19 +124,25 @@ public class PlayerController : MonoBehaviour
             grounded = false;
         }
     }
+    void CheckForInteractions()
+    {
+        hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, 1.5f, LayerMask.GetMask("Interactable"));
+        if (hit.collider != null)
+        {
+            GameManager.instance.CreateInteractionPrompt("Press E to interact");
+        } else
+        {
+            GameManager.instance.RemoveInteractionPrompt();
+        } 
+    }
     void Interact()
     {
-        RaycastHit2D hit = Physics2D.Raycast(playerRb.position + Vector2.down * 0.2f, Vector2.right*lookDirection, 1.5f, LayerMask.GetMask("NPC"));
-        if (hit.collider != null)
+        if (hit.collider != null && hit.collider.CompareTag("NPC"))
         {
-            GameManager.instance.NPCDialogue(hit.collider.name);
-            return;
-        }
-        hit = Physics2D.Raycast(playerRb.position + Vector2.up * 0.2f, Vector2.right * lookDirection, 1.2f, LayerMask.GetMask("InteractableObject"));
-        if (hit.collider != null)
+            hit.collider.GetComponent<DialogueSystemTrigger>().OnUse();
+        } else if (hit.collider != null && hit.collider.CompareTag("Object"))
         {
             Debug.Log("Object!");
-            return;
         }
     }
 }

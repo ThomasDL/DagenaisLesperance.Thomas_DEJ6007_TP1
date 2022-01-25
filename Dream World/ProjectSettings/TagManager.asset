@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - Object
   layers:
   - Default
   - TransparentFX
@@ -12,8 +13,8 @@ TagManager:
   - Player
   - Water
   - UI
-  - NPC
-  - InteractableObject
+  - Interactable
+  - 
   - Ground
   - 
   - 
@@ -42,9 +43,12 @@ TagManager:
   - name: Background
     uniqueID: 1343167561
     locked: 0
+  - name: Behind Player
+    uniqueID: 1357938601
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Dialogues
-    uniqueID: 1357938601
+  - name: In front of player
+    uniqueID: 2139410393
     locked: 0

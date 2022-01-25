@@ -13,9 +13,4 @@ public class TestCutscene : MonoBehaviour
             testCutsceneDirector.Play();
         }
     }
-
-    public void TestCutsceneDialogue()
-    {
-        GameManager.instance.CallDialogueNode("TestCutscene1");
-    }
 }

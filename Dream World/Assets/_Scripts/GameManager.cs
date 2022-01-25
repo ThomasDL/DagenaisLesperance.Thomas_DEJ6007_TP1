@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn.Unity;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, int> npcDialoguesNodes = new Dictionary<string, int>();
     public List<string> eventNodes = new List<string>();
 
-    public DialogueRunner dialogueRunner;
-    public Canvas dialogueCanvas;
+    public TextMeshProUGUI interactionPrompt;
 
     public bool playerActive = true;
 
@@ -28,36 +28,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-    public void CallDialogueNode(string node)
-    {
-        dialogueRunner.StartDialogue(node);
-    }
-    // Returns the correct dialogue node for a NPC
-    // If this is the first time talking to the NPC, returns node1
-    public void NPCDialogue(string NPC)
-    {
-        if (!npcDialoguesNodes.ContainsKey(NPC))
-        {
-            dialogueRunner.StartDialogue(NPC + "Node" + 1);
-        }
-        else
-        {
-            dialogueRunner.StartDialogue(NPC + "Node" + npcDialoguesNodes[NPC]);
-        }
-    }
-    // Tracks the progression of the player related to conversations
-    [YarnCommand("AddDialogueNodeToDictionary")]
-    public void AddDialogueNodeToDictionary(string name, int node)
-    {
-        if (!npcDialoguesNodes.ContainsKey(name))
-        {
-            npcDialoguesNodes.Add(name, node);
-        }
-        else
-        {
-            npcDialoguesNodes[name] = node;
-        }
-    }
+
     public void AddEventToList(string eventName)
     {
         if (!eventNodes.Contains(eventName))
@@ -65,7 +36,7 @@ public class GameManager : MonoBehaviour
             eventNodes.Add(eventName);
         }
     }
-    [YarnCommand("LoadNewScene")]
+
     public void LoadNewScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -77,11 +48,14 @@ public class GameManager : MonoBehaviour
     public void MakePlayerInactive()
     {
         playerActive = false;
+        interactionPrompt.text = "";
     }
-
-    public void MoveDialogueBoxTo(string talker)
+    public void CreateInteractionPrompt(string prompt)
     {
-        Vector3 talkerPosition = GameObject.Find(talker).transform.position;
-        dialogueCanvas.transform.position = talkerPosition;
+        interactionPrompt.text = prompt;
+    }
+    public void RemoveInteractionPrompt()
+    {
+        interactionPrompt.text = "";
     }
 }
