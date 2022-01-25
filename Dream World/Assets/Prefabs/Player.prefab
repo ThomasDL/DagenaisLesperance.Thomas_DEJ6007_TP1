@@ -209,7 +209,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 110526, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_Name
-      value: Bubble Template Standard UI Menu Panel
+      value: Bubble Menu Panel
       objectReference: {fileID: 0}
     - target: {fileID: 11405310, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_Sprite
@@ -838,7 +838,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 122694, guid: 9052074e55e1f964c8c25e4b6d86be6c, type: 3}
       propertyPath: m_Name
-      value: Bubble Template Standard UI Subtitle Panel
+      value: Bubble Subtitle Panel
       objectReference: {fileID: 0}
     - target: {fileID: 11403906, guid: 9052074e55e1f964c8c25e4b6d86be6c, type: 3}
       propertyPath: m_Color.b
