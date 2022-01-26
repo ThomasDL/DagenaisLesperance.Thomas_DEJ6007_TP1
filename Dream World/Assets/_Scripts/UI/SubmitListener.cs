@@ -6,30 +6,35 @@ using UnityEngine.UI;
 // This class is to make sure the player can't spam the continue button during dialogues.
 public class SubmitListener : MonoBehaviour
 {
-    Button thisButton;
-    bool canContinue = false;
+    public Button thisButton;
 
-    void Start()
+    private void Start()
     {
-        thisButton = GetComponent<Button>();
+        thisButton.interactable = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canContinue && Input.GetAxis("Submit") > 0.5f)
+        if(thisButton.IsInteractable() && Input.GetKeyDown(KeyCode.E))
         {
-            canContinue = false;
+            thisButton.interactable = false;
+            StopCoroutine(WaitBeforeInput());
             thisButton.onClick.Invoke();
         }
     }
     private void OnEnable()
     {
+        thisButton.interactable = false;
         StartCoroutine(WaitBeforeInput());
     }
     IEnumerator WaitBeforeInput()
     {
-        yield return new WaitForSeconds(0.7f);
-        canContinue = true;
+        yield return new WaitForSeconds(0.6f);
+        thisButton.interactable = true;
+    }
+    private void OnDisable()
+    {
+        thisButton.interactable = false;
     }
 }

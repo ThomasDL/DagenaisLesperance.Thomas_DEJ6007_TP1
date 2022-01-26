@@ -212,19 +212,13 @@ MonoBehaviour:
       isGroup: 0
       nodeColor: 
       delaySimStatus: 0
-      falseConditionAction: 
+      falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks:
       - originConversationID: 1
         originDialogueID: 0
         destinationConversationID: 1
         destinationDialogueID: 9
-        isConnector: 0
-        priority: 2
-      - originConversationID: 1
-        originDialogueID: 0
-        destinationConversationID: 1
-        destinationDialogueID: 10
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -290,7 +284,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 210
-        y: 70
+        y: 120
         width: 160
         height: 30
     - id: 2
@@ -357,7 +351,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 210
-        y: 120
+        y: 170
         width: 160
         height: 30
     - id: 3
@@ -411,8 +405,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 2
-        y: 172
+        x: 30
+        y: 220
         width: 160
         height: 30
     - id: 4
@@ -466,8 +460,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 211
-        y: 169
+        x: 210
+        y: 220
         width: 160
         height: 30
     - id: 5
@@ -528,7 +522,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 210
-        y: 220
+        y: 270
         width: 160
         height: 30
     - id: 6
@@ -582,8 +576,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 74
-        y: 269
+        x: 75
+        y: 320
         width: 160
         height: 30
     - id: 7
@@ -638,7 +632,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 345
-        y: 270
+        y: 320
         width: 160
         height: 30
     - id: 8
@@ -692,8 +686,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 402
-        y: 173
+        x: 390
+        y: 220
         width: 160
         height: 30
     - id: 9
@@ -747,63 +741,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 424
-        y: 43
-        width: 160
-        height: 30
-    - id: 10
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: Hi
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      conversationID: 1
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 1
-        originDialogueID: 10
-        destinationConversationID: 1
-        destinationDialogueID: 1
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 40
-        y: 55
+        x: 210
+        y: 70
         width: 160
         height: 30
     entryGroups: []
