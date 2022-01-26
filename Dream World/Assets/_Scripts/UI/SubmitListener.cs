@@ -30,7 +30,7 @@ public class SubmitListener : MonoBehaviour
     }
     IEnumerator WaitBeforeInput()
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.3f);
         thisButton.interactable = true;
     }
     private void OnDisable()
