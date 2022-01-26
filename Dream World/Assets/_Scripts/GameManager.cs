@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Yarn.Unity;
+using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
@@ -43,12 +43,12 @@ public class GameManager : MonoBehaviour
     }
     public void MakePlayerActive()
     {
-        playerActive = true;
+        StartCoroutine(MakePlayerActiveCoroutine());
     }
     public void MakePlayerInactive()
     {
-        playerActive = false;
         interactionPrompt.text = "";
+        playerActive = false;
     }
     public void CreateInteractionPrompt(string prompt)
     {
@@ -57,5 +57,10 @@ public class GameManager : MonoBehaviour
     public void RemoveInteractionPrompt()
     {
         interactionPrompt.text = "";
+    }
+    IEnumerator MakePlayerActiveCoroutine()
+    {
+        yield return null;
+        playerActive = true;
     }
 }

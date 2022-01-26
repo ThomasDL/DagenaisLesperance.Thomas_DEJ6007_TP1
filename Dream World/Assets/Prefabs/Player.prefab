@@ -207,6 +207,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2114871385382767916}
     m_Modifications:
+    - target: {fileID: 2238609978534570411, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529518618797953815, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+      propertyPath: continueButton
+      value: 
+      objectReference: {fileID: 3496771252386830301}
+    - target: {fileID: 2529518618798042347, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2529518618805219663, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
       propertyPath: m_Name
       value: Bubble Subtitle Panel
@@ -351,6 +363,10 @@ PrefabInstance:
       propertyPath: charactersPerSecond
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 7406763001804345805, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
 --- !u!224 &3023210419692393410 stripped
@@ -367,6 +383,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a9540f98bb79346b296ec5feb51073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3496771252386830301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4208957993206614078, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+  m_PrefabInstance: {fileID: 787635239597875171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2114871385650429997

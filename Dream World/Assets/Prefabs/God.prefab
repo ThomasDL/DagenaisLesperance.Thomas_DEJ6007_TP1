@@ -219,6 +219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4206714708002696751}
     m_Modifications:
+    - target: {fileID: 2529518618798042347, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2529518618805219663, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
       propertyPath: m_Name
       value: Bubble Subtitle Panel

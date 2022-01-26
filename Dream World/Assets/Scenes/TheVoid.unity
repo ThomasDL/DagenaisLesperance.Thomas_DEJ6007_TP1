@@ -808,6 +808,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1746255676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4208957993206614078, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+  m_PrefabInstance: {fileID: 2005036856}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1788871297 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 11453294, guid: d5a18ab9ec93e0d4284d6fbae4f557e0, type: 3}
@@ -1156,6 +1167,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 336159215}
     m_Modifications:
+    - target: {fileID: 2529518618797953815, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
+      propertyPath: continueButton
+      value: 
+      objectReference: {fileID: 1746255676}
     - target: {fileID: 2529518618798042347, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -1562,10 +1577,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1836315763623577856, guid: 6653a23129b6a7e468679dc9f8418591, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1836315763649103868, guid: 6653a23129b6a7e468679dc9f8418591, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

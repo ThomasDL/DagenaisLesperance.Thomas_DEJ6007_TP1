@@ -25,7 +25,7 @@ AnimationClip:
         value: 0
         inSlope: -2
         outSlope: -2
-        tangentMode: 34
+        tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -37,7 +37,7 @@ AnimationClip:
     classID: 225
     script: {fileID: 0}
   m_PPtrCurves: []
-  m_SampleRate: 60
+  m_SampleRate: 20
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -81,7 +81,7 @@ AnimationClip:
         value: 0
         inSlope: -2
         outSlope: -2
-        tangentMode: 34
+        tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
