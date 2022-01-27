@@ -8,7 +8,7 @@ public class SubmitListener : MonoBehaviour
 {
     public Button thisButton;
 
-    private void Start()
+    private void Awake()
     {
         thisButton.interactable = false;
     }

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private float speed = 5.0f;
     private float horizontalInput;
-    private int lookDirection;
+    private int lookDirection =1;
 
     private float jumpForce = 11.0f;
     private bool isJumping = false;
@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
         playerSprite = GetComponent<SpriteRenderer>();
-        lookDirection = 1;
     }
 
     // Update is called once per frame
@@ -43,8 +42,8 @@ public class PlayerController : MonoBehaviour
         { 
             HandleMovement();
             CheckForInteractions();
-        }
-        CheckIfGrounded();
+            CheckIfGrounded();
+        }  
     }
     void HandleInput()
     {
@@ -110,7 +109,7 @@ public class PlayerController : MonoBehaviour
     }
     void CheckIfGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size*1.05f, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
         if (raycastHit.collider != null)
         {
             if (!grounded)
