@@ -1,5 +1,5 @@
-using UnityEngine;
 using PixelCrushers.DialogueSystem;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private float speed = 5.0f;
     private float horizontalInput;
-    private int lookDirection =1;
+    private int lookDirection = 1;
 
     private float jumpForce = 11.0f;
     private bool isJumping = false;
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private float jumpTimer;
     private bool grounded;
     private RaycastHit2D hit;
+    private bool isActive;
+    private bool canInteract;
 
     void Start()
     {
@@ -30,67 +32,62 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.playerActive)
-        {
-            HandleInput();
-        }
+        isActive = GameManager.instance.isPlayerActive;
+        HandleInput();
         HandleAnimation();
     }
     private void FixedUpdate()
     {
-        if (GameManager.instance.playerActive) 
-        { 
-            HandleMovement();
-            CheckForInteractions();
-            CheckIfGrounded();
-        }  
+        CheckIfGrounded();
+        HandleMovement();
+        CheckForInteractions();
     }
     void HandleInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        if(grounded && Input.GetKeyDown(KeyCode.Space))
+        if (isActive)
         {
-            Jump();
+            horizontalInput = Input.GetAxis("Horizontal");
+            if (grounded && Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
+            if (Input.GetKeyUp(KeyCode.Space) || jumpTimer > maxJumpTime)
+            {
+                isJumping = false;
+            }
+            if (Input.GetKeyDown(KeyCode.E) && grounded)
+            {
+                Interact();
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Space) || jumpTimer > maxJumpTime)
+        else
         {
+            horizontalInput = 0;
             isJumping = false;
-        }
-        if (Input.GetKeyDown(KeyCode.E)&&grounded)
-        {
-            Interact();
         }
     }
     void HandleAnimation()
     {
-        if (GameManager.instance.playerActive)
+        if (horizontalInput > 0.1f)
         {
-            if (horizontalInput > 0.1f)
-            {
-                lookDirection = 1;
-                playerSprite.flipX = false;
+            lookDirection = 1;
+            playerSprite.flipX = false;
 
-            }
-            else if (horizontalInput < -0.1f)
-            {
-                lookDirection = -1;
-                playerSprite.flipX = true;
-            }
-            if (grounded)
-            {
-                playerAnim.SetBool("IsJumping", false);
-            }
-            else
-            {
-                playerAnim.SetBool("IsJumping", true);
-            }
-            playerAnim.SetFloat("Speed", Mathf.Abs(playerRb.velocity.x));
+        }
+        else if (horizontalInput < -0.1f)
+        {
+            lookDirection = -1;
+            playerSprite.flipX = true;
+        }
+        if (grounded)
+        {
+            playerAnim.SetBool("IsAirborne", false);
         }
         else
         {
-            playerAnim.SetFloat("Speed", 0);
-            playerAnim.SetBool("IsJumping", false);
-        } 
+            playerAnim.SetBool("IsAirborne", true);
+        }
+        playerAnim.SetFloat("Speed", Mathf.Abs(playerRb.velocity.x));
     }
     void HandleMovement()
     {
@@ -100,7 +97,7 @@ public class PlayerController : MonoBehaviour
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
             jumpTimer += Time.deltaTime;
         }
-        
+
     }
     void Jump()
     {
@@ -109,7 +106,7 @@ public class PlayerController : MonoBehaviour
     }
     void CheckIfGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size*1.05f, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size * 1.05f, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
         if (raycastHit.collider != null)
         {
             if (!grounded)
@@ -126,20 +123,29 @@ public class PlayerController : MonoBehaviour
     void CheckForInteractions()
     {
         hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, 1.5f, LayerMask.GetMask("Interactable"));
-        if (hit.collider != null)
-        {
-            GameManager.instance.CreateInteractionPrompt("Press E to interact");
-        } else
+        if (hit.collider == null && canInteract)
         {
             GameManager.instance.RemoveInteractionPrompt();
-        } 
+            canInteract = false;
+        }
+        else if (!isActive)
+        {
+            canInteract = false;
+        }
+        else if (hit.collider != null && !canInteract)
+        {
+            GameManager.instance.CreateInteractionPrompt("Press E to interact");
+            canInteract = true;
+        }
+
     }
     void Interact()
     {
-        if (hit.collider != null && hit.collider.CompareTag("NPC"))
+        if (canInteract && hit.collider.CompareTag("NPC"))
         {
             hit.collider.GetComponent<DialogueSystemTrigger>().OnUse();
-        } else if (hit.collider != null && hit.collider.CompareTag("Object"))
+        }
+        else if (canInteract && hit.collider.CompareTag("Object"))
         {
             Debug.Log("Object!");
         }

@@ -18,9 +18,9 @@ public class SubmitListener : MonoBehaviour
     {
         if(thisButton.IsInteractable() && Input.GetKeyDown(KeyCode.E))
         {
-            thisButton.interactable = false;
             StopCoroutine(WaitBeforeInput());
             thisButton.onClick.Invoke();
+            thisButton.interactable = false;
         }
     }
     private void OnEnable()

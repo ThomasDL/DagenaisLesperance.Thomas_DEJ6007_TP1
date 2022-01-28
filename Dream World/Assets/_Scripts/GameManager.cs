@@ -9,12 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public Dictionary<string, int> npcDialoguesNodes = new Dictionary<string, int>();
-    public List<string> eventNodes = new List<string>();
-
     public TextMeshProUGUI interactionPrompt;
 
-    public bool playerActive = true;
+    public bool isPlayerActive = true;
 
     void Awake()
     {
@@ -29,14 +26,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddEventToList(string eventName)
-    {
-        if (!eventNodes.Contains(eventName))
-        {
-            eventNodes.Add(eventName);
-        }
-    }
-
     public void LoadNewScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -47,8 +36,8 @@ public class GameManager : MonoBehaviour
     }
     public void MakePlayerInactive()
     {
-        interactionPrompt.text = "";
-        playerActive = false;
+        RemoveInteractionPrompt();
+        isPlayerActive = false;
     }
     public void CreateInteractionPrompt(string prompt)
     {
@@ -61,6 +50,6 @@ public class GameManager : MonoBehaviour
     IEnumerator MakePlayerActiveCoroutine()
     {
         yield return null;
-        playerActive = true;
+        isPlayerActive = true;
     }
 }
