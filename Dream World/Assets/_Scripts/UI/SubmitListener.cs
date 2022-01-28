@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,33 +6,13 @@ public class SubmitListener : MonoBehaviour
 {
     public Button thisButton;
 
-    private void Awake()
-    {
-        thisButton.interactable = false;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(thisButton.IsInteractable() && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E))
         {
-            StopCoroutine(WaitBeforeInput());
+
             thisButton.onClick.Invoke();
-            thisButton.interactable = false;
+
         }
-    }
-    private void OnEnable()
-    {
-        thisButton.interactable = false;
-        StartCoroutine(WaitBeforeInput());
-    }
-    IEnumerator WaitBeforeInput()
-    {
-        yield return new WaitForSeconds(0.3f);
-        thisButton.interactable = true;
-    }
-    private void OnDisable()
-    {
-        thisButton.interactable = false;
     }
 }
