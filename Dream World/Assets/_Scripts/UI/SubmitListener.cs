@@ -10,9 +10,7 @@ public class SubmitListener : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.E))
         {
-
             thisButton.onClick.Invoke();
-
         }
     }
 }

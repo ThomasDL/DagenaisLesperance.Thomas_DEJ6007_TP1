@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Pixel Crushers. All rights reserved.
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PixelCrushers.DialogueSystem.Wrappers
 {
@@ -13,6 +14,11 @@ namespace PixelCrushers.DialogueSystem.Wrappers
     [AddComponentMenu("Pixel Crushers/Dialogue System/UI/Standard UI/Dialogue/Standard UI Subtitle Panel")]
     public class StandardUISubtitlePanel : PixelCrushers.DialogueSystem.StandardUISubtitlePanel
     {
+        protected override void Start()
+        {
+            base.Start();
+            continueButton = GameObject.Find("ContinueButton").GetComponent<Button>();
+        }
     }
 
 }
