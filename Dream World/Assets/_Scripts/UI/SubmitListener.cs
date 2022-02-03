@@ -8,7 +8,7 @@ public class SubmitListener : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetButtonDown("Submit"))
         {
             thisButton.onClick.Invoke();
         }
