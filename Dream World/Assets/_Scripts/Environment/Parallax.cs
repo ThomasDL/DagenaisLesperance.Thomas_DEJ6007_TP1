@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    private GameObject camera;
+    private GameObject mainCamera;
     private float startPosX;
     private float startPosY;
     private float length;
@@ -12,7 +12,7 @@ public class Parallax : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.Find("CM vcam1");
+        mainCamera = GameObject.Find("Main Camera");
         startPosX = transform.position.x;
         startPosY = transform.position.y;
         length = GetComponent<SpriteRenderer>().bounds.size.x;
@@ -21,8 +21,8 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float distX = camera.transform.position.x * parallaxEffect;
-        float distY = camera.transform.position.y * parallaxEffect;
+        float distX = mainCamera.transform.position.x * parallaxEffect;
+        float distY = mainCamera.transform.position.y * parallaxEffect;
 
         transform.position = new Vector3(startPosX + distX, startPosY + distY, transform.position.z);
 

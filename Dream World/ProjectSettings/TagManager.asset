@@ -40,19 +40,19 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background 4
+  - name: Background 0
     uniqueID: 908385995
     locked: 0
-  - name: Background 3
+  - name: Background 1
     uniqueID: 2867205661
     locked: 0
   - name: Background 2
     uniqueID: 1795649717
     locked: 0
-  - name: Background 1
+  - name: Background 3
     uniqueID: 1450105705
     locked: 0
-  - name: Background 0
+  - name: Background 4
     uniqueID: 1343167561
     locked: 0
   - name: Behind Player
@@ -63,4 +63,7 @@ TagManager:
     locked: 0
   - name: In front of player
     uniqueID: 2139410393
+    locked: 0
+  - name: In front of everything
+    uniqueID: 4179777175
     locked: 0
