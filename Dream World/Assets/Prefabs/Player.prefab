@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fc743b0a724bf4981c19c5cd823ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnim: {fileID: 0}
 --- !u!61 &2114871385382767918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214,7 +213,7 @@ PrefabInstance:
     - target: {fileID: 2529518618797953815, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
       propertyPath: continueButton
       value: 
-      objectReference: {fileID: 3496771252386830301}
+      objectReference: {fileID: 0}
     - target: {fileID: 2529518618798042347, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -383,17 +382,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a9540f98bb79346b296ec5feb51073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3496771252386830301 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4208957993206614078, guid: 80b32c3f0bc40fc46a46f3296d1863a6, type: 3}
-  m_PrefabInstance: {fileID: 787635239597875171}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2114871385650429997

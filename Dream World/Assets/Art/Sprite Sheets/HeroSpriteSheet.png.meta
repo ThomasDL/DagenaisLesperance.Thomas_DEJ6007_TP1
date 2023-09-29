@@ -180,6 +180,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1360,6 +1361,59 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      HeroSpriteSheet_47: -2284833288013570581
+      HeroSpriteSheet_27: -7370061323175629684
+      HeroSpriteSheet_4: 7066867478374586066
+      HeroSpriteSheet_7: 3842730616597082113
+      HeroSpriteSheet_3: -6540989991162227585
+      HeroSpriteSheet_16: 345099707265291996
+      HeroSpriteSheet_37: -640426639984991311
+      HeroSpriteSheet_39: 1462357339777303135
+      HeroSpriteSheet_41: 1245554844629038141
+      HeroSpriteSheet_35: -4261589260032761080
+      HeroSpriteSheet_13: -1493426137026846859
+      HeroSpriteSheet_25: -4368104989765775237
+      HeroSpriteSheet_10: -1820060766945909750
+      HeroSpriteSheet_2: -4990360343463409494
+      HeroSpriteSheet_42: -5704871717161037804
+      HeroSpriteSheet_20: -840712285118178019
+      HeroSpriteSheet_50: 4081643475394426348
+      HeroSpriteSheet_23: 6648034355320818814
+      HeroSpriteSheet_22: -9071937174588956946
+      HeroSpriteSheet_36: 7680621645797141235
+      HeroSpriteSheet_44: -2024779939700301139
+      HeroSpriteSheet_40: 4850858063463251846
+      HeroSpriteSheet_28: -3207087557746894904
+      HeroSpriteSheet_9: 7995864602002331014
+      HeroSpriteSheet_34: -7538160795237294377
+      HeroSpriteSheet_46: -1762978776031620207
+      HeroSpriteSheet_5: -8421179396440808430
+      HeroSpriteSheet_32: -447789156334972879
+      HeroSpriteSheet_24: 1490026708820986738
+      HeroSpriteSheet_30: 3263280489095198388
+      HeroSpriteSheet_43: -6081284691557941085
+      HeroSpriteSheet_48: -2965873334328945358
+      HeroSpriteSheet_17: 5952029938103637063
+      HeroSpriteSheet_19: -4586275682864690882
+      HeroSpriteSheet_8: -7669488069713499204
+      HeroSpriteSheet_21: 7845631600458891082
+      HeroSpriteSheet_29: 7986552404864726154
+      HeroSpriteSheet_14: -5280349659162901802
+      HeroSpriteSheet_15: 5659783335849360357
+      HeroSpriteSheet_33: -1022682968330222112
+      HeroSpriteSheet_6: 3768440282811480042
+      HeroSpriteSheet_11: 5308753044654245642
+      HeroSpriteSheet_18: 1065163168028303063
+      HeroSpriteSheet_31: -2786518612199998585
+      HeroSpriteSheet_45: -7049546949650749268
+      HeroSpriteSheet_51: 1461768360254957669
+      HeroSpriteSheet_0: -8602926230381060715
+      HeroSpriteSheet_12: 7697907456060252140
+      HeroSpriteSheet_26: -5187318730047065315
+      HeroSpriteSheet_1: -5210749695808078556
+      HeroSpriteSheet_38: 6454851999181189303
+      HeroSpriteSheet_49: 7737669790478022154
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,14 +1,18 @@
 using PixelCrushers.DialogueSystem;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
     private BoxCollider2D playerCollider;
-    public Animator playerAnim;
+    private Animator playerAnim;
     private SpriteRenderer playerSprite;
 
-    private float speed = 5.0f;
+    private const float walkSpeed = 4.0f;
+    private const float runSpeed = 9.0f;
+    private const float bottomMapLimit = -10f;
+    private float speed = 4.0f;
     private float horizontalInput;
     private int lookDirection = 1;
 
@@ -16,10 +20,11 @@ public class PlayerController : MonoBehaviour
     private bool isJumping = false;
     private float maxJumpTime = 0.2f;
     private float jumpTimer;
-    private bool grounded;
+    private bool isGrounded;
     private RaycastHit2D hit;
     private bool isActive;
     private bool canInteract;
+    private bool doubleJump = true;
 
     void Start()
     {
@@ -41,13 +46,14 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
         HandleMovement();
         CheckForInteractions();
+        CheckForInfiniteFall();
     }
     void HandleInput()
     {
         if (isActive)
         {
             horizontalInput = Input.GetAxis("Horizontal");
-            if (grounded && Input.GetKeyDown(KeyCode.Space))
+            if ((isGrounded || doubleJump) && Input.GetButtonDown("Jump"))
             {
                 Jump();
             }
@@ -55,10 +61,12 @@ public class PlayerController : MonoBehaviour
             {
                 isJumping = false;
             }
-            if (Input.GetKeyDown(KeyCode.E) && grounded)
+            if (Input.GetButtonDown("Submit") && isGrounded)
             {
                 Interact();
             }
+            if (Input.GetButton("Fire3") && isGrounded) speed = runSpeed;
+            else if(isGrounded) speed = walkSpeed;
         }
         else
         {
@@ -79,7 +87,7 @@ public class PlayerController : MonoBehaviour
             lookDirection = -1;
             playerSprite.flipX = true;
         }
-        if (grounded)
+        if (isGrounded)
         {
             playerAnim.SetBool("IsAirborne", false);
         }
@@ -97,27 +105,28 @@ public class PlayerController : MonoBehaviour
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
             jumpTimer += Time.deltaTime;
         }
-
     }
     void Jump()
     {
+        if (!isGrounded) doubleJump = false;
         isJumping = true;
         jumpTimer = 0;
     }
     void CheckIfGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size * 1.05f, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size * 1.05f, 0f, Vector2.down, 0.3f, LayerMask.GetMask("Ground"));
         if (raycastHit.collider != null)
         {
-            if (!grounded)
+            if (!isGrounded)
             {
                 playerAnim.SetTrigger("Landing");
+                doubleJump = true;
             }
-            grounded = true;
+            isGrounded = true;
         }
         else
         {
-            grounded = false;
+            isGrounded = false;
         }
     }
     void CheckForInteractions()
@@ -149,5 +158,27 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Object!");
         }
+    }
+    void CheckForInfiniteFall()
+    {
+        if(transform.position.y < bottomMapLimit)
+        {
+            StartCoroutine(PlayerIsHit());
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Spikes"))
+        {
+            StartCoroutine(PlayerIsHit());
+        }
+    }
+    IEnumerator PlayerIsHit()
+    {
+        GameManager.instance.ChangeLifePoints(-1);
+        transform.position = new Vector3(0, 0, 0);
+        playerSprite.color = Color.red;
+        yield return new WaitForSeconds(0.4f);
+        playerSprite.color = Color.white;
     }
 }

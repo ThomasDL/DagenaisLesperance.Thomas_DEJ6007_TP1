@@ -228,6 +228,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1744,6 +1745,75 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      AdventurerSpriteSheet_56: 2996655387818109665
+      AdventurerSpriteSheet_38: 8574492980014850059
+      AdventurerSpriteSheet_24: -2869342869969456646
+      AdventurerSpriteSheet_67: 3840302036955274585
+      AdventurerSpriteSheet_1: -1144383841272572308
+      AdventurerSpriteSheet_26: -9066868065575558379
+      AdventurerSpriteSheet_46: -3096290013132184489
+      AdventurerSpriteSheet_54: -2909565913665896603
+      AdventurerSpriteSheet_27: -1003488604877122185
+      AdventurerSpriteSheet_17: 604552435209614702
+      AdventurerSpriteSheet_7: 3963652663380613413
+      AdventurerSpriteSheet_5: 7624072068962119464
+      AdventurerSpriteSheet_10: 6701306454252417
+      AdventurerSpriteSheet_47: -1566137770733305161
+      AdventurerSpriteSheet_37: 6592609731296563926
+      AdventurerSpriteSheet_55: -4111313604101754212
+      AdventurerSpriteSheet_23: -1821093003207418971
+      AdventurerSpriteSheet_20: 2634869745668931092
+      AdventurerSpriteSheet_11: -6959713907813843953
+      AdventurerSpriteSheet_14: -5870441438505066781
+      AdventurerSpriteSheet_22: 8699486648235192706
+      AdventurerSpriteSheet_6: -1067795176504468430
+      AdventurerSpriteSheet_31: -135211545822183337
+      AdventurerSpriteSheet_51: 4107738286526250249
+      AdventurerSpriteSheet_64: -1608349169191465280
+      AdventurerSpriteSheet_13: -418333586797328230
+      AdventurerSpriteSheet_19: -5940718652426591334
+      AdventurerSpriteSheet_52: -7202585291369646755
+      AdventurerSpriteSheet_29: -3696100743589201206
+      AdventurerSpriteSheet_62: 1601223222937667080
+      AdventurerSpriteSheet_4: -9108081434702486833
+      AdventurerSpriteSheet_57: 640176861879638217
+      AdventurerSpriteSheet_40: -7423810670463128696
+      AdventurerSpriteSheet_36: 1260176769136864644
+      AdventurerSpriteSheet_43: 3593688651198452073
+      AdventurerSpriteSheet_41: -745814456885918901
+      AdventurerSpriteSheet_12: 9185211858919356645
+      AdventurerSpriteSheet_25: 6979591049423399420
+      AdventurerSpriteSheet_48: 5530235523974027552
+      AdventurerSpriteSheet_16: 3825885673940498248
+      AdventurerSpriteSheet_44: -3685490855033202771
+      AdventurerSpriteSheet_65: -901913666648202474
+      AdventurerSpriteSheet_2: -5701486608605149270
+      AdventurerSpriteSheet_0: -8905312868067173782
+      AdventurerSpriteSheet_3: -5740003337470106376
+      AdventurerSpriteSheet_60: -2253757243156920374
+      AdventurerSpriteSheet_34: -4504673901455904789
+      AdventurerSpriteSheet_30: 2436349319217208724
+      AdventurerSpriteSheet_18: 2809339429448800519
+      AdventurerSpriteSheet_53: -3372457359241573322
+      AdventurerSpriteSheet_21: -6592922066927985991
+      AdventurerSpriteSheet_15: 1296252886200262848
+      AdventurerSpriteSheet_61: 3753749242650478744
+      AdventurerSpriteSheet_42: 2274397501500991938
+      AdventurerSpriteSheet_33: 1354560519580620406
+      AdventurerSpriteSheet_59: 6399299955232275362
+      AdventurerSpriteSheet_63: -8308201259601771064
+      AdventurerSpriteSheet_49: 6920634480849488678
+      AdventurerSpriteSheet_8: -3667605450822136490
+      AdventurerSpriteSheet_28: 4737092490502143093
+      AdventurerSpriteSheet_50: 7887534818875503249
+      AdventurerSpriteSheet_9: -7876872445029282882
+      AdventurerSpriteSheet_45: -1513629890621768088
+      AdventurerSpriteSheet_35: -8531514799028617584
+      AdventurerSpriteSheet_32: -8671792550035390642
+      AdventurerSpriteSheet_58: 5403637154379798119
+      AdventurerSpriteSheet_66: -2705612947937768925
+      AdventurerSpriteSheet_39: 5089480495712184818
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
