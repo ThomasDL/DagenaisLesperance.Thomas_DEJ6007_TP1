@@ -175,10 +175,12 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator PlayerIsHit()
     {
+        GameManager.instance.isPlayerActive = false;
         GameManager.instance.ChangeLifePoints(-1);
         transform.position = new Vector3(0, 0, 0);
         playerSprite.color = Color.red;
         yield return new WaitForSeconds(0.4f);
+        GameManager.instance.isPlayerActive = true;
         playerSprite.color = Color.white;
     }
 }
