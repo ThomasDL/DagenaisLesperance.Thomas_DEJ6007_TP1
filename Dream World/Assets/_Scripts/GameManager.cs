@@ -1,15 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Yarn.Unity;
+using System.Collections;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public bool playerActive = true;
-    public Dictionary<string, int> npcDialoguesNodes = new Dictionary<string, int>();
-    public List<string> eventNodes = new List<string>();
-    public DialogueRunner dialogueRunner;
+
+    public TextMeshProUGUI interactionPrompt;
+    public TextMeshProUGUI lifeText;
+    public GameObject gameOverObject;
+    public GameObject youWonObject;
+
+    public bool isPlayerActive = true;
+
+    private const int maxLifePoints = 3;
+    private int currentLifePoints;
 
     void Awake()
     {
@@ -22,74 +30,52 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(gameObject);
+        currentLifePoints = maxLifePoints;
     }
-    public void CallDialogueNode(string node)
+
+    public void ReloadScene()
     {
-        dialogueRunner.StartDialogue(node);
-    }
-    // Returns the correct dialogue node for a NPC
-    // If this is the first time talking to the NPC, returns node1
-    public void NPCDialogue(string NPC)
-    {
-        if (!npcDialoguesNodes.ContainsKey(NPC))
-        {
-            dialogueRunner.StartDialogue(NPC + "Node" + 1);
-        }
-        else
-        {
-            dialogueRunner.StartDialogue(NPC + "Node" + npcDialoguesNodes[NPC]);
-        }
-    }
-    // Tracks the progression of the player related to conversations
-    [YarnCommand("AddDialogueNodeToDictionary")]
-    public void AddDialogueNodeToDictionary(string name, int node)
-    {
-        if (!npcDialoguesNodes.ContainsKey(name))
-        {
-            npcDialoguesNodes.Add(name, node);
-        }
-        else
-        {
-            npcDialoguesNodes[name] = node;
-        }
-    }
-    public void AddEventToList(string eventName)
-    {
-        if (!eventNodes.Contains(eventName))
-        {
-            eventNodes.Add(eventName);
-        }
-    }
-    [YarnCommand("LoadNewScene")]
-    public void LoadNewScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
+        currentLifePoints = maxLifePoints;
+        isPlayerActive = true;
+        gameOverObject.SetActive(false);
+        SceneManager.LoadScene(0);
     }
     public void MakePlayerActive()
     {
-        playerActive = true;
+        isPlayerActive = true;
     }
     public void MakePlayerInactive()
     {
-        playerActive = false;
+        RemoveInteractionPrompt();
+        isPlayerActive = false;
     }
-    [YarnCommand("MoveDialogueBoxTo")]
-    void MoveDialogueBoxTo(string talker, string listener)
+    public void CreateInteractionPrompt(string prompt)
     {
-        GameObject talkerObject = GameObject.Find(talker);
-        GameObject listenerObject = GameObject.Find(listener);
-        float cameraOffsetDown = 1.5f;
-        float cameraOffsetUp = 2.2f;
-        if (talkerObject != null && listenerObject != null)
-        {
-            if (talkerObject.transform.position.y > listenerObject.transform.position.y)
-            {
-                dialogueRunner.transform.position = talkerObject.transform.position + Vector3.up * cameraOffsetUp;
-            }
-            else
-            {
-                dialogueRunner.transform.position = talkerObject.transform.position + Vector3.down * cameraOffsetDown;
-            }
-        }
+        interactionPrompt.gameObject.SetActive(true);
+        interactionPrompt.text = prompt;
+    }
+    public void RemoveInteractionPrompt()
+    {
+        interactionPrompt.gameObject.SetActive(false);
+    }
+    void ShowLifePoints()
+    {
+        lifeText.text = "PV = " + currentLifePoints;
+    }
+    public void ChangeLifePoints(int modifier)
+    {
+        currentLifePoints = Mathf.Clamp(currentLifePoints + modifier, 0, maxLifePoints);
+        ShowLifePoints();
+        if(currentLifePoints == 0) PlayerDead();
+    }
+    void PlayerDead()
+    {
+        isPlayerActive = false;
+        gameOverObject.SetActive(true);
+    }
+    void PlayerWon()
+    {
+        isPlayerActive = false;
+        youWonObject.SetActive(true);
     }
 }

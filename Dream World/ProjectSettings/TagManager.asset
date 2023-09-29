@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - Object
   layers:
   - Default
   - TransparentFX
@@ -12,9 +13,9 @@ TagManager:
   - Player
   - Water
   - UI
-  - NPC
-  - InteractableObject
-  - 
+  - Interactable
+  - Spikes
+  - Ground
   - 
   - 
   - 
@@ -39,9 +40,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
+  - name: Background 4
+    uniqueID: 908385995
+    locked: 0
+  - name: Background 3
+    uniqueID: 2867205661
+    locked: 0
+  - name: Background 2
+    uniqueID: 1795649717
+    locked: 0
+  - name: Background 1
+    uniqueID: 1450105705
+    locked: 0
+  - name: Background 0
     uniqueID: 1343167561
+    locked: 0
+  - name: Behind Player
+    uniqueID: 1357938601
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: In front of player
+    uniqueID: 2139410393
     locked: 0
