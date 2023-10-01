@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
 
     public bool isPlayerActive = true;
 
-    private const int maxLifePoints = 3;
-    private int currentLifePoints;
+    private const int maxHP = 3;
+    private int currentHP;
 
     void Awake()
     {
@@ -30,12 +30,12 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(gameObject);
-        currentLifePoints = maxLifePoints;
+        currentHP = maxHP;
     }
 
     public void ReloadScene()
     {
-        currentLifePoints = maxLifePoints;
+        currentHP = maxHP;
         isPlayerActive = true;
         gameOverObject.SetActive(false);
         SceneManager.LoadScene(0);
@@ -60,20 +60,20 @@ public class GameManager : MonoBehaviour
     }
     void ShowLifePoints()
     {
-        lifeText.text = "PV = " + currentLifePoints;
+        lifeText.text = "HP = " + currentHP;
     }
     public void ChangeLifePoints(int modifier)
     {
-        currentLifePoints = Mathf.Clamp(currentLifePoints + modifier, 0, maxLifePoints);
+        currentHP = Mathf.Clamp(currentHP + modifier, 0, maxHP);
         ShowLifePoints();
-        if(currentLifePoints == 0) PlayerDead();
+        if(currentHP == 0) PlayerDead();
     }
     void PlayerDead()
     {
         isPlayerActive = false;
         gameOverObject.SetActive(true);
     }
-    void PlayerWon()
+    public void PlayerWon()
     {
         isPlayerActive = false;
         youWonObject.SetActive(true);

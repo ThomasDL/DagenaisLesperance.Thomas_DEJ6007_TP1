@@ -7,12 +7,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private BoxCollider2D playerCollider;
     private Animator playerAnim;
-    private SpriteRenderer playerSprite;
+    private SpriteRenderer playerSpriteRenderer;
 
-    private const float walkSpeed = 4.0f;
+    private const float walkSpeed = 4.5f;
     private const float runSpeed = 9.0f;
     private const float bottomMapLimit = -10f;
-    private float speed = 4.0f;
+    private float speed;
     private float horizontalInput;
     private int lookDirection = 1;
 
@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private float maxJumpTime = 0.2f;
     private float jumpTimer;
     private bool isGrounded;
-    private RaycastHit2D hit;
     private bool isActive;
     private bool canInteract;
     private bool doubleJump = true;
@@ -31,7 +30,8 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
-        playerSprite = GetComponent<SpriteRenderer>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        speed = walkSpeed;
     }
 
     // Update is called once per frame
@@ -79,13 +79,13 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput > 0.1f)
         {
             lookDirection = 1;
-            playerSprite.flipX = false;
+            playerSpriteRenderer.flipX = false;
 
         }
         else if (horizontalInput < -0.1f)
         {
             lookDirection = -1;
-            playerSprite.flipX = true;
+            playerSpriteRenderer.flipX = true;
         }
         if (isGrounded)
         {
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
     }
     void CheckForInteractions()
     {
-        hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, 1.5f, LayerMask.GetMask("Interactable"));
+        RaycastHit2D hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, 1.5f, LayerMask.GetMask("Interactable"));
         if (hit.collider == null && canInteract)
         {
             GameManager.instance.RemoveInteractionPrompt();
@@ -150,13 +150,10 @@ public class PlayerController : MonoBehaviour
     }
     void Interact()
     {
+        RaycastHit2D hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, 1.5f, LayerMask.GetMask("Interactable"));
         if (canInteract && hit.collider.CompareTag("NPC"))
         {
             hit.collider.GetComponent<DialogueSystemTrigger>().OnUse();
-        }
-        else if (canInteract && hit.collider.CompareTag("Object"))
-        {
-            Debug.Log("Object!");
         }
     }
     void CheckForInfiniteFall()
@@ -173,14 +170,22 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PlayerIsHit());
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.TryGetComponent(out IEnemy enemy))
+        {
+            if (transform.position.y - collision.transform.position.y > playerSpriteRenderer.bounds.size.y / 2) StartCoroutine(enemy.EnemyDead());
+            else StartCoroutine(PlayerIsHit());
+        }
+    }
     IEnumerator PlayerIsHit()
     {
         GameManager.instance.isPlayerActive = false;
         GameManager.instance.ChangeLifePoints(-1);
         transform.position = new Vector3(0, 0, 0);
-        playerSprite.color = Color.red;
+        playerSpriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.4f);
         GameManager.instance.isPlayerActive = true;
-        playerSprite.color = Color.white;
+        playerSpriteRenderer.color = Color.white;
     }
 }
