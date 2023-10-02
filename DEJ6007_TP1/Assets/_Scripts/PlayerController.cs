@@ -9,19 +9,20 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private SpriteRenderer playerSpriteRenderer;
 
+    private Vector3 checkpointPosition;
+
     private const float walkSpeed = 4.5f;
     private const float runSpeed = 9.0f;
-    private const float bottomMapLimit = -10f;
+    private const float interactDistance = 1.8f;
     private float speed;
     private float horizontalInput;
     private int lookDirection = 1;
-
     private float jumpForce = 11.0f;
     private bool isJumping = false;
     private float maxJumpTime = 0.2f;
     private float jumpTimer;
     private bool isGrounded;
-    private bool isActive;
+    private bool isActive = true;
     private bool canInteract;
     private bool doubleJump = true;
 
@@ -32,12 +33,12 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         speed = walkSpeed;
+        checkpointPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        isActive = GameManager.instance.isPlayerActive;
         HandleInput();
         HandleAnimation();
     }
@@ -46,7 +47,8 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
         HandleMovement();
         CheckForInteractions();
-        CheckForInfiniteFall();
+
+        if (transform.position.y < GameManager.bottomMapLimit) StartCoroutine(PlayerIsHit());
     }
     void HandleInput()
     {
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour
     }
     void CheckIfGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size * 1.05f, 0f, Vector2.down, 0.3f, LayerMask.GetMask("Ground"));
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size * 0.9f, 0f, Vector2.down, 0.3f, LayerMask.GetMask("Ground"));
         if (raycastHit.collider != null)
         {
             if (!isGrounded)
@@ -131,7 +133,7 @@ public class PlayerController : MonoBehaviour
     }
     void CheckForInteractions()
     {
-        RaycastHit2D hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, 1.5f, LayerMask.GetMask("Interactable"));
+        RaycastHit2D hit = Physics2D.Raycast(playerRb.position, Vector2.right * lookDirection, interactDistance, LayerMask.GetMask("Interactable"));
         if (hit.collider == null && canInteract)
         {
             GameManager.instance.RemoveInteractionPrompt();
@@ -156,19 +158,20 @@ public class PlayerController : MonoBehaviour
             hit.collider.GetComponent<DialogueSystemTrigger>().OnUse();
         }
     }
-    void CheckForInfiniteFall()
-    {
-        if(transform.position.y < bottomMapLimit)
-        {
-            StartCoroutine(PlayerIsHit());
-        }
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Spikes"))
         {
             StartCoroutine(PlayerIsHit());
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Checkpoint")) 
+        {
+            checkpointPosition = collision.transform.position;
+            Debug.Log("Yeah");
+        } 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -180,12 +183,25 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator PlayerIsHit()
     {
-        GameManager.instance.isPlayerActive = false;
-        GameManager.instance.ChangeLifePoints(-1);
-        transform.position = new Vector3(0, 0, 0);
+        isActive = false;
+        GameManager.instance.ChangePlayerHP(-1);
+        transform.position = checkpointPosition;
         playerSpriteRenderer.color = Color.red;
+        playerRb.velocity = Vector3.zero;
         yield return new WaitForSeconds(0.4f);
-        GameManager.instance.isPlayerActive = true;
+        isActive = true;
         playerSpriteRenderer.color = Color.white;
+    }
+    private void OnEnable()
+    {
+        GameManager.playerActivationChange += PlayerActivationChange;
+    }
+    private void OnDisable()
+    {
+        GameManager.playerActivationChange -= PlayerActivationChange;
+    }
+    private void PlayerActivationChange(bool newIsActive)
+    {
+        isActive = newIsActive;
     }
 }

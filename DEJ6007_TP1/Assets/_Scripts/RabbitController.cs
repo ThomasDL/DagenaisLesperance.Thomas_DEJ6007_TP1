@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class RabbitController : MonoBehaviour, IEnemy
 {
-    Rigidbody2D rabbitRb;
+    protected Rigidbody2D thisRb;
     SpriteRenderer rabbitSr;
 
     Vector3 startPosition;
 
     float travelDistance = 4f;
-    float speed = 2f;
-    float deathAnimationSpeed = 15f;
+    public float speed;
     float jumpForce = 500f;
     float jumpInterval = 0.7f;
-    float maxDeathAnimationTime = 1f;
-    int moveDirection = -1;
-    bool isAlive = true;
+    protected float maxDeathAnimationTime = 1f;
+    protected float deathAnimationSpeed = 15f;
+    public int moveDirection = -1;
+    protected bool isAlive = true;
 
     void Start()
     {
-        rabbitRb = GetComponent<Rigidbody2D>();
+        thisRb = GetComponent<Rigidbody2D>();
         rabbitSr = GetComponent<SpriteRenderer>();  
         startPosition = transform.position;
         StartCoroutine(JumpLoop());
@@ -40,27 +40,27 @@ public class RabbitController : MonoBehaviour, IEnemy
                 moveDirection = -1;
                 rabbitSr.flipX = false;
             }
-            rabbitRb.velocity = new Vector3(speed * moveDirection, rabbitRb.velocity.y);
+            thisRb.velocity = new Vector3(speed * moveDirection, thisRb.velocity.y);
         }
     }
     IEnumerator JumpLoop()
     {
         while (isAlive)
         {
-            rabbitRb.AddForce(Vector3.up * jumpForce);
+            thisRb.AddForce(Vector3.up * jumpForce);
             yield return new WaitForSeconds(jumpInterval);
         }
     }
     IEnumerator IEnemy.EnemyDead()
     {
-        rabbitRb.isKinematic = true;
-        rabbitRb.freezeRotation = false;
+        thisRb.isKinematic = true;
+        thisRb.freezeRotation = false;
         isAlive = false;
-        rabbitRb.velocity = new Vector3(0, -deathAnimationSpeed);
+        thisRb.velocity = new Vector3(0, -deathAnimationSpeed);
         float deathAnimationTime = 0f;
         while(deathAnimationTime < maxDeathAnimationTime)
         {
-            rabbitRb.rotation += 5f;
+            thisRb.rotation += 5f;
             yield return null;
             deathAnimationTime += Time.deltaTime;
         }

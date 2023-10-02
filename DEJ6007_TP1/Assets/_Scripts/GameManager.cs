@@ -10,14 +10,16 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public TextMeshProUGUI interactionPrompt;
-    public TextMeshProUGUI lifeText;
+    public TextMeshProUGUI hpText;
     public GameObject gameOverObject;
-    public GameObject youWonObject;
 
-    public bool isPlayerActive = true;
+    public const float bottomMapLimit = -10f;
 
     private const int maxHP = 3;
     private int currentHP;
+
+    public delegate void PlayerActivationChange(bool isActive);
+    public static event PlayerActivationChange playerActivationChange;
 
     void Awake()
     {
@@ -36,18 +38,19 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         currentHP = maxHP;
-        isPlayerActive = true;
+        ShowHP();
+        playerActivationChange?.Invoke(true);
         gameOverObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
     public void MakePlayerActive()
     {
-        isPlayerActive = true;
+        playerActivationChange?.Invoke(true);
     }
     public void MakePlayerInactive()
     {
         RemoveInteractionPrompt();
-        isPlayerActive = false;
+        playerActivationChange?.Invoke(false);
     }
     public void CreateInteractionPrompt(string prompt)
     {
@@ -58,24 +61,20 @@ public class GameManager : MonoBehaviour
     {
         interactionPrompt.gameObject.SetActive(false);
     }
-    void ShowLifePoints()
+    void ShowHP()
     {
-        lifeText.text = "HP = " + currentHP;
+        hpText.text = "HP = " + currentHP;
     }
-    public void ChangeLifePoints(int modifier)
+    public void ChangePlayerHP(int modifier)
     {
         currentHP = Mathf.Clamp(currentHP + modifier, 0, maxHP);
-        ShowLifePoints();
-        if(currentHP == 0) PlayerDead();
+        ShowHP();
+        if(currentHP == 0) EndoftheGame("Game Over");
     }
-    void PlayerDead()
+    public void EndoftheGame(string endText)
     {
-        isPlayerActive = false;
+        playerActivationChange?.Invoke(false);
         gameOverObject.SetActive(true);
-    }
-    public void PlayerWon()
-    {
-        isPlayerActive = false;
-        youWonObject.SetActive(true);
+        gameOverObject.GetComponentInChildren<TextMeshProUGUI>().text = endText;
     }
 }
