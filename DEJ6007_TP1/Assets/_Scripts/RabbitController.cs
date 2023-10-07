@@ -25,6 +25,8 @@ public class RabbitController : MonoBehaviour, IEnemy
     public int moveDirection = -1;
     protected bool isAlive = true;
 
+    bool IEnemy.isAlive { get { return isAlive; } }
+
     void Start()
     {
         thisRb = GetComponent<Rigidbody2D>();
@@ -84,5 +86,6 @@ public class RabbitController : MonoBehaviour, IEnemy
 }
 public interface IEnemy
 {
+    bool isAlive { get; }
     IEnumerator EnemyDead();
 }

@@ -606,8 +606,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: A = va vers la gauche, D = va vers la droite. Shift ou click gauche
-          = courir.
+        value: A = vers la gauche, D = vers la droite. Shift ou click gauche = courir.
         type: 0
         typeString: 
       - title: Sequence
@@ -1161,8 +1160,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Ben voyons, chu l'diable! Ah au fait je sais pas si on te l'avait
-          dit, mais je vais voler ton \xE2me. Adi\xF3s!"
+        value: "Ben voyons, chu l'diable! Au fait, je sais pas si on te l'avait dit,
+          mais je vais voler ton \xE2me. Adi\xF3s!"
         type: 0
         typeString: 
       - title: Sequence
