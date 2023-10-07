@@ -36,12 +36,13 @@ public class PlayerController : MonoBehaviour
         checkpointPosition = transform.position;
     }
 
-    // Update is called once per frame
+    // Les input et l'animation sont gérés par la méthode Update.
     void Update()
     {
         HandleInput();
         HandleAnimation();
     }
+    //  Le check de sol, le mouvement, le check d'interactions et le check de la limite du monde sont gérés par le FixedUpdate.
     private void FixedUpdate()
     {
         CheckIfGrounded();
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y < GameManager.bottomMapLimit) StartCoroutine(PlayerIsHit());
     }
+
     void HandleInput()
     {
         if (isActive)
@@ -145,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (hit.collider != null && !canInteract)
         {
-            GameManager.instance.CreateInteractionPrompt("Press E to interact");
+            GameManager.instance.CreateInteractionPrompt("Appuie sur E pour interagir");
             canInteract = true;
         }
 
@@ -170,7 +172,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Checkpoint")) 
         {
             checkpointPosition = collision.transform.position;
-            Debug.Log("Yeah");
         } 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -189,7 +190,7 @@ public class PlayerController : MonoBehaviour
         playerSpriteRenderer.color = Color.red;
         playerRb.velocity = Vector3.zero;
         yield return new WaitForSeconds(0.4f);
-        isActive = true;
+        if (GameManager.instance.currentHP != 0) isActive = true;
         playerSpriteRenderer.color = Color.white;
     }
     private void OnEnable()
