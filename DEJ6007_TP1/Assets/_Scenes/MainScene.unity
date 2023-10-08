@@ -11015,7 +11015,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Life Solved?
+            m_StringArgument: "Sens de la vie r\xE9solu?"
             m_BoolArgument: 0
           m_CallState: 2
   - guid: 3b216fb4-074d-4390-addb-fc84286c8e74
@@ -11031,7 +11031,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Soul Lost
+            m_StringArgument: "\xC2me perdue"
             m_BoolArgument: 0
           m_CallState: 2
   - guid: 5c9c8f97-92ae-422d-98fa-31ba5414007a

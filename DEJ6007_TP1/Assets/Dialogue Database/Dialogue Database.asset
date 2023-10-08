@@ -1408,61 +1408,6 @@ MonoBehaviour:
       - originConversationID: 4
         originDialogueID: 10
         destinationConversationID: 4
-        destinationDialogueID: 11
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 64
-        y: 380
-        width: 160
-        height: 30
-    - id: 11
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: "La r\xE9ponse est non, tu veux pas..."
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      conversationID: 4
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 4
-        originDialogueID: 11
-        destinationConversationID: 4
         destinationDialogueID: 13
         isConnector: 0
         priority: 2
@@ -1474,7 +1419,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 64
-        y: 430
+        y: 380
         width: 160
         height: 30
     - id: 13
@@ -1500,7 +1445,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "En tout cas, fais-en c'que t'en veux, mais \xE0 ta place je clouerais
+        value: "En gros, c'que j'essaie de t'dire, c'est qu'\xE0 ta place je clouerais
           un deux par quatre sur ton gyproc."
         type: 0
         typeString: 
@@ -1533,8 +1478,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 64
-        y: 475.8824
+        x: 64.52941
+        y: 434.70587
         width: 160
         height: 30
     - id: 14
@@ -1586,8 +1531,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 62.823532
-        y: 525.8823
+        x: 65.176476
+        y: 488.2353
         width: 160
         height: 30
     - id: 15
