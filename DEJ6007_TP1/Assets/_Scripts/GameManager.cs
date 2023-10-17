@@ -46,11 +46,11 @@ public class GameManager : MonoBehaviour
     // Méthode utilisée pour recommencer le jeu.
     public void ReloadScene()
     {
+        SceneManager.LoadScene(0);
         currentHP = maxHP;
         ShowHP();
         playerActivationChange?.Invoke(true);
         gameOverObject.SetActive(false);
-        SceneManager.LoadScene(0);
     }
     // Ça fait ce que ça dit.
     public void MakePlayerActive()
