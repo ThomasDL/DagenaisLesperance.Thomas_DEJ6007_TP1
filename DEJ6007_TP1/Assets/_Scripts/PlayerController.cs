@@ -8,12 +8,16 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D playerCollider;
     private Animator playerAnim;
     private SpriteRenderer playerSpriteRenderer;
+    private AudioSource playerAudioSource;
+
+    public AudioClip jumpAudioClip;
+    public AudioClip hurtAudioClip;
 
     private Vector3 checkpointPosition;
 
     private const float walkSpeed = 4.5f;
     private const float runSpeed = 9.0f;
-    private const float interactDistance = 1.8f;
+    private const float interactDistance = 2f;
     private float speed;
     private float horizontalInput;
     private int lookDirection = 1;
@@ -32,6 +36,7 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerAudioSource = GetComponent<AudioSource>();
         speed = walkSpeed;
         checkpointPosition = transform.position;
     }
@@ -127,6 +132,9 @@ public class PlayerController : MonoBehaviour
 
         // Le timer de saut limite dans le temps l'application de la force verticale.
         jumpTimer = 0;
+
+        // On fait jouer le son de saut.
+        playerAudioSource.PlayOneShot(jumpAudioClip);
     }
     void CheckIfGrounded()
     {
@@ -208,8 +216,9 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator PlayerIsHit()
     {
-        // Si le joueur prend un coup, il perd une vie et revient au dernier checkpoint
-        // et il flashe rouge et ne peut pas bouger pendant 0.4 secondes.
+        // Si le joueur prend un coup, il perd une vie, revient au dernier checkpoint,
+        // il flashe rouge et ne peut pas bouger pendant 0.4 secondes.
+        playerAudioSource.PlayOneShot(hurtAudioClip);
         isActive = false;
         GameManager.instance.ChangePlayerHP(-1);
         transform.position = checkpointPosition;

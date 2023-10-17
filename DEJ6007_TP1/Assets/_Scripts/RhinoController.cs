@@ -13,6 +13,7 @@ public class RhinoController : RabbitController
     {
         thisRb = GetComponent<Rigidbody2D>();
         rhinoSr = GetComponent<SpriteRenderer>();
+        thisAudioSource = GetComponent<AudioSource>();
 
         // Le rhino fait face à gauche par défaut, mais si le moveDirection est 1 (donc vers la droite)
         // le SpriteRenderer doit être "flippé" pour qu'il fasse face à droite.

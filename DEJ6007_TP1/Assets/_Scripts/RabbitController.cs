@@ -7,10 +7,14 @@ using UnityEngine;
 public class RabbitController : MonoBehaviour, IEnemy
 {
     protected Rigidbody2D thisRb;
-    SpriteRenderer rabbitSr;
+    protected AudioSource thisAudioSource;
+    private SpriteRenderer rabbitSr;
 
     Vector3 startPosition;
 
+    [Range(-1, 1)]
+    public int moveDirection = -1;
+    protected bool isAlive = true;
     float travelDistance = 4f;
     public float speed;
 
@@ -21,16 +25,13 @@ public class RabbitController : MonoBehaviour, IEnemy
     protected float maxDeathAnimationTime = 1f;
     protected float deathAnimationSpeed = 15f;
 
-    [Range(-1, 1)]
-    public int moveDirection = -1;
-    protected bool isAlive = true;
-
     bool IEnemy.isAlive { get { return isAlive; } }
 
     void Start()
     {
         thisRb = GetComponent<Rigidbody2D>();
         rabbitSr = GetComponent<SpriteRenderer>();  
+        thisAudioSource = GetComponent<AudioSource>();
         startPosition = transform.position;
         // Le lapin se met à sauter dès le début.
         StartCoroutine(JumpLoop());
@@ -70,6 +71,7 @@ public class RabbitController : MonoBehaviour, IEnemy
     // S'il est tué par le joueur, le lapin se met à tomber vers le bas en tournoyant puis s'autodétruit.
     IEnumerator IEnemy.EnemyDead()
     {
+        thisAudioSource.Play();
         thisRb.isKinematic = true;
         thisRb.freezeRotation = false;
         isAlive = false;

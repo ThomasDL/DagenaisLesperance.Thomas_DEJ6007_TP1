@@ -1334,7 +1334,8 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: "Des fois tu te l\xE8ves pis il t'manque un pied ou ben une id\xE9e."
+        value: "Des fois tu t'r\xE9veilles pis tu comprends pas pourquoi il t'manque
+          un pied ou une id\xE9e."
         type: 0
         typeString: 
       - title: Sequence
@@ -1362,8 +1363,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 64
-        y: 330
+        x: 61.647064
+        y: 329.99997
         width: 160
         height: 30
     - id: 10
@@ -1418,7 +1419,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 64
+        x: 64.000015
         y: 380
         width: 160
         height: 30
@@ -1642,7 +1643,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 135.29413}
+    canvasScrollPosition: {x: 0, y: 133.25443}
     canvasZoom: 0.85000014
   syncInfo:
     syncActors: 0
