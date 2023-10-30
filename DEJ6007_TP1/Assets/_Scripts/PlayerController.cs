@@ -6,29 +6,34 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
     private BoxCollider2D playerCollider;
+
     private Animator playerAnim;
     private SpriteRenderer playerSpriteRenderer;
-    private AudioSource playerAudioSource;
 
+    private AudioSource playerAudioSource;
     public AudioClip jumpAudioClip;
     public AudioClip hurtAudioClip;
 
     private Vector3 checkpointPosition;
 
+    private float speed;
     private const float walkSpeed = 4.5f;
     private const float runSpeed = 9.0f;
+    
     private const float interactDistance = 2f;
-    private float speed;
+    private bool canInteract;
+
     private float horizontalInput;
     private int lookDirection = 1;
-    private float jumpForce = 11.0f;
+
+    private const float jumpForce = 11.0f;
     private bool isJumping = false;
-    private float maxJumpTime = 0.2f;
+    private const float maxJumpTime = 0.2f;
     private float jumpTimer;
     private bool isGrounded;
-    private bool isActive = true;
-    private bool canInteract;
     private bool doubleJump = true;
+
+    private bool isActive = true;
 
     void Start()
     {
@@ -40,17 +45,19 @@ public class PlayerController : MonoBehaviour
         speed = walkSpeed;
         checkpointPosition = transform.position;
     }
-    // Les inputsm le check d'interactions et l'animation sont gérés par l'Update.
+
+    // Le check de ground, les inputs, le check d'interactions et l'animation sont gérés par l'Update.
     void Update()
     {
+        CheckIfGrounded();
         HandleInput();
         CheckForInteractions();
         HandleAnimation();
     }
-    //  Le check de sol et le mouvement sont gérés par le FixedUpdate.
+
+    //  Le mouvement est géré par le FixedUpdate.
     private void FixedUpdate()
     {
-        CheckIfGrounded();
         HandleMovement();
         
         // Si le joueur a dépassé la limite inférieur du monde, il subit un coup.
@@ -71,7 +78,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // S'il relache le bouton de saut ou que le temps de saut est écoulé, le personnage ne reçoit plus de force
-            // vers le haut (voir HandleMovement()). À savoir que le joueur peut affecter sa force de saut
+            // vers le haut (voir HandleMovement()). À savoir que le joueur peut augmenter son saut
             // s'il appuie plus longtemps sur la touche de jump.
             if (Input.GetKeyUp(KeyCode.Space) || jumpTimer > maxJumpTime)
             {
@@ -82,7 +89,7 @@ public class PlayerController : MonoBehaviour
             // sa vitesse est augmentée à la vitesse de course.
             // Sinon et qu'il est sur le sol, elle est réduite à la vitesse de marche.
             if (Input.GetButton("Run") && isGrounded) speed = runSpeed;
-            else if(isGrounded) speed = walkSpeed;
+            else if (isGrounded) speed = walkSpeed;
         }
         else
         {
@@ -104,9 +111,11 @@ public class PlayerController : MonoBehaviour
             lookDirection = 1;
             playerSpriteRenderer.flipX = false;
         }
+
         // Si le joueur est sur le sol, la variable d'animation IsAirborne est fausse, sinon elle est vraie.
         playerAnim.SetBool("IsAirborne", !isGrounded);
-        // La vitesse du joueur est envoyée à l'Animator.
+
+        // La vitesse du joueur en x est envoyée à l'Animator.
         playerAnim.SetFloat("Speed", Mathf.Abs(playerRb.velocity.x));
     }
     void HandleMovement()
@@ -138,8 +147,8 @@ public class PlayerController : MonoBehaviour
     }
     void CheckIfGrounded()
     {
-        // Le jeu regarde si un objet de type sol est à environ 0.3 unités de distance du joueur. Si oui, il est sur le sol.
-        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size * 0.9f, 0f, Vector2.down, 0.3f, LayerMask.GetMask("Ground"));
+        // Le jeu regarde si un objet de type sol est à environ 0.2 unités de distance du joueur. Si oui, il est sur le sol.
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size*0.95f, 0f, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
         if (raycastHit.collider != null)
         {
             if (!isGrounded)
@@ -167,15 +176,16 @@ public class PlayerController : MonoBehaviour
         {
             canInteract = false;
         }
-        else if (hit.collider != null && !canInteract)
+        else if (hit.collider != null && !canInteract && isGrounded)
         {
             // Un message apparaît à l'écran si le joueur peut interagir avec quelque chose.
             GameManager.instance.CreateInteractionPrompt("Appuie sur E pour interagir");
             canInteract = true;
         }
+
         // Si le joueur peut interagir avec quelque chose (voir CheckForInteractions()) et qu'il pèse sur 
         // le bouton Submit et qu'il est au sol, la méthode Interact est appelée.
-        if (canInteract && Input.GetButtonDown("Submit") && isGrounded)
+        if (canInteract && Input.GetButtonDown("Submit"))
         {
             Interact(hit);
         }
@@ -195,6 +205,7 @@ public class PlayerController : MonoBehaviour
         {
             checkpointPosition = collision.transform.position;
         }
+
         // Si le joueur touche à des pics, il prend un coup.
         if (collision.gameObject.layer == LayerMask.NameToLayer("Spikes"))
         {
@@ -217,7 +228,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PlayerIsHit()
     {
         // Si le joueur prend un coup, il perd une vie, revient au dernier checkpoint,
-        // il flashe rouge et ne peut pas bouger pendant 0.4 secondes.
+        // flashe rouge et ne peut pas bouger pendant 0.4 secondes.
         playerAudioSource.PlayOneShot(hurtAudioClip);
         isActive = false;
         GameManager.instance.ChangePlayerHP(-1);
@@ -228,6 +239,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance.currentHP != 0) isActive = true;
         playerSpriteRenderer.color = Color.white;
     }
+
     // Le personnage souscrit à l'événement PlayerActivationChange du GM. Celui-ci affecte s'il est actif ou non.
     private void OnEnable()
     {

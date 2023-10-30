@@ -59,6 +59,7 @@ public class RabbitController : MonoBehaviour, IEnemy
             thisRb.velocity = new Vector3(speed * moveDirection, thisRb.velocity.y);
         }
     }
+
     // Tant qu'il est en vie, il saute! C'est un lapin après tout...
     IEnumerator JumpLoop()
     {
@@ -68,6 +69,7 @@ public class RabbitController : MonoBehaviour, IEnemy
             yield return new WaitForSeconds(jumpInterval);
         }
     }
+
     // S'il est tué par le joueur, le lapin se met à tomber vers le bas en tournoyant puis s'autodétruit.
     IEnumerator IEnemy.EnemyDead()
     {

@@ -7,25 +7,24 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton pattern
+    // L'instance du GameManager doit être accessible par tous les scripts.
     public static GameManager instance;
+
     // Le GameManager contrôle les éléments de UI. 
     // C'est probablement pas une bonne structure pour un plus gros projet mais ça marche dans ce cas.
     public TextMeshProUGUI interactionPrompt;
     public TextMeshProUGUI hpText;
-    public GameObject gameOverObject;
+    public GameObject gameOverPanel;
 
     // Cette constante représente la limite inférieure du tableau.
-    public const float bottomMapLimit = -10f;
+    public const float bottomMapLimit = -5f;
 
     // Le GameManager est responsable de garder en mémoire les PV du joueur. Ça aurait pu être le script 
-    // du personnage, mais comme les éléments de UI sont controllés par le GM 
-    // ça me semblait plus simple. 
+    // du personnage, mais comme les éléments de UI sont controllés par le GM ça me semblait plus simple. 
     private const int maxHP = 3;
     public int currentHP { get; private set; }
 
-    // Si jamais le PlayerController doit être désactivé (ou réactivé), n'importe quelle classe
-    // peut se servir du GM et de cet événement pour facilement le faire.
+    // Cet événement peut être appelé pour désactiver (ou réactiver) le PlayerController.
     public delegate void PlayerActivationChange(bool isActive);
     public static event PlayerActivationChange playerActivationChange;
 
@@ -50,7 +49,7 @@ public class GameManager : MonoBehaviour
         currentHP = maxHP;
         ShowHP();
         playerActivationChange?.Invoke(true);
-        gameOverObject.SetActive(false);
+        gameOverPanel.SetActive(false);
     }
     // Ça fait ce que ça dit.
     public void MakePlayerActive()
@@ -90,7 +89,7 @@ public class GameManager : MonoBehaviour
     public void EndoftheGame(string endText)
     {
         playerActivationChange?.Invoke(false);
-        gameOverObject.SetActive(true);
-        gameOverObject.GetComponentInChildren<TextMeshProUGUI>().text = endText;
+        gameOverPanel.SetActive(true);
+        gameOverPanel.GetComponentInChildren<TextMeshProUGUI>().text = endText;
     }
 }

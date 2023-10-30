@@ -29,7 +29,7 @@ public class Parallax : MonoBehaviour
 
         // Si jamais la distance entre la caméra et cette image dépasse sa longueur,
         // elle est déplacée d'une distance égale à sa longueur vers le joueur.
-        // Comme ça, le joueur a l'impression que les images de fond le suive et ne les dépasse jamais.
+        // Comme ça, le joueur a l'impression que le fond est infini.
         if ((cam.transform.position.x - transform.position.x) > length) 
         {
             startPosX += length;
