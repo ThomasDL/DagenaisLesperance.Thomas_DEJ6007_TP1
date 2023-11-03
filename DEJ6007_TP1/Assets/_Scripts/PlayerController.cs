@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             // S'il relache le bouton de saut ou que le temps de saut est écoulé, le personnage ne reçoit plus de force
             // vers le haut (voir HandleMovement()). À savoir que le joueur peut augmenter son saut
             // s'il appuie plus longtemps sur la touche de jump.
-            if (Input.GetKeyUp(KeyCode.Space) || jumpTimer > maxJumpTime)
+            if (Input.GetButtonUp("Jump") || jumpTimer > maxJumpTime)
             {
                 isJumping = false;
             }

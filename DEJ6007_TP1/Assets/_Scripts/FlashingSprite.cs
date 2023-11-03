@@ -6,10 +6,10 @@ public class FlashingSprite : MonoBehaviour
 {
     SpriteRenderer thisSpriteRenderer;
     bool isVisible = true;
-    float lowerLimitVisible = 0.5f;
-    float upperLimitVisible = 2f;
+    float lowerLimitVisible = 0.4f;
+    float upperLimitVisible = 1.5f;
     float lowerLimitInvisible = 0.1f;
-    float upperLimitInvisible = 1f;
+    float upperLimitInvisible = 0.9f;
 
     void Start()
     {
